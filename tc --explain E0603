@@ -1,0 +1,22 @@
+[0mA private item was used outside its scope.[0m
+
+[0mErroneous code example:[0m
+
+[0m[0m[2mmod foo {
+    const PRIVATE: u32 = 0x_a_bad_1dea_u32; // This const is private, so we
+                                            // can't use it outside of the
+                                            // `foo` module.
+}
+
+println!("const value: {}", foo::PRIVATE); // error: constant `PRIVATE`
+                                                  //        is private[0m
+
+[0mIn order to fix this error, you need to make the item public by using the [0m[0m[2mpub[0m [0mkeyword.
+Example:[0m
+
+[0m[0m[2mmod foo {
+    pub const PRIVATE: u32 = 0x_a_bad_1dea_u32; // We set it public by using the
+                                                // `pub` keyword.
+}
+
+println!("const value: {}", foo::PRIVATE); // ok![0m[0m
